@@ -1,0 +1,160 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8"/>
+    <title>java-kadai</title>
+<link rel="stylesheet" href="main.css" />
+<style>
+    #toc {
+        position: fixed;
+        top: 60px; /* ボタンと目次が重ならないように調整 */
+        left: 0;
+        width: 20%;
+        max-width: 300px;
+        background-color: #f9f9f9;
+        padding: 10px;
+        border: 1px solid #ccc;
+        box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        box-sizing: border-box;
+        max-height: 80vh;
+        overflow-y: auto;
+    }
+
+    #toggle-toc {
+        position: fixed;
+        top: 20px;
+        left: 0;
+        background-color: #007bff;
+        color: white;
+        border: none;
+        padding: 10px;
+        cursor: pointer;
+        z-index: 1000;
+    }
+
+    @media (min-width: 768px) {
+        #toc {
+            width: 25%;
+            max-width: 300px;
+        }
+    }
+
+    @media (min-width: 1024px) {
+        #toc {
+            width: 20%;
+            max-width: 300px;
+        }
+    }
+</style>
+</head>
+<body>
+
+    <button id="toggle-toc">目次を表示/非表示</button>
+    <div id="toc">
+        <h2>目次</h2>
+        <ul>
+            <li><a href="#api">API通信とは</a></li>
+            <li><a href="#axios">Axiosとは</a></li>
+            <li><a href="#basic-example">AxiosでのAPI通信の基本例</a></li>
+            <li><a href="#notice">API通信時の注意点</a></li>
+            <li><a href="#benefits">Axiosを使ったAPI通信のメリット</a></li>
+            <li><a href="#alternatives">Axiosの代替ツール</a></li>
+            <li><a href="#error-handling">エラーハンドリング</a></li>
+        </ul>
+    </div>
+    
+    <h1>AxiosとAPI通信について</h1>
+
+    <h2 id="api">API通信とは</h2>
+        <p><a href="https://ja.wikipedia.org/wiki/%E3%82%A2%E3%83%97%E3%83%AA%E3%82%B1%E3%83%BC%E3%82%B7%E3%83%A7%E3%83%B3%E3%83%97%E3%83%AD%E3%82%B0%E3%83%A9%E3%83%9F%E3%83%B3%E3%82%B0%E3%82%A4%E3%83%B3%E3%82%BF%E3%83%95%E3%82%A7%E3%83%BC%E3%82%B9">API(Application Programming Interface)</a>とは、接続先のOSを呼び出すことや互いのソフトウェアやアプリケーション機能の一部を共有することです。APIを通じて連携をすることで、アプリケーション機能を拡張させ、双方のアプリが更に便利になることがメリットです。人間がコンピュータを利用する際は<a href="https://ja.wikipedia.org/wiki/%E3%82%B0%E3%83%A9%E3%83%95%E3%82%A3%E3%82%AB%E3%83%AB%E3%83%A6%E3%83%BC%E3%82%B6%E3%82%A4%E3%83%B3%E3%82%BF%E3%83%95%E3%82%A7%E3%83%BC%E3%82%B9">GUI(Graphical User Interface)</a>を通じてOSやアプリケーションを利用しますが、コンピュータはプログラムを通じてOSやアプリケーションの機能利用するので、プログラマ（アプリケーションエンジニア）は<a href="https://ja.wikipedia.org/wiki/%E3%82%AD%E3%83%A3%E3%83%A9%E3%82%AF%E3%82%BF%E3%83%A6%E3%83%BC%E3%82%B6%E3%82%A4%E3%83%B3%E3%82%BF%E3%83%95%E3%82%A7%E3%83%BC%E3%82%B9">CUI(Character-based User Interface)</a>を用いてソフトウェアやアプリケーションを開発します。一方でAPIは、アプリケーション開発で既存のライブラリを使う場合に用いられ、用意されたAPIに従って処理を記述することで、ライブラリの中身を知らなくてもライブラリが持つ機能を使用できます。OSが提供する機能を呼び出すために使われるAPIもあれば、他のアプリケーションが提供する機能を呼び出すために使われるAPIも存在します。</p>
+        <img src="APIup.jpg" alt="APIup" width="70%" />
+        <img src="APIdown.jpg" alt="APIdown" width="70%" />
+        <h2 id="axios">Axiosとは</h2>
+        <p>HTTP通信（データの更新・取得）を簡単に行うことができる、JavaScriptのライブラリ。<br />
+            APIを提供するクラウドサービスに対して、データを送受信することができる。</p>
+
+        <h3 id="basic-example">AxiosでのAPI通信の基本例</h3>
+            <ul>
+                <li>GETリクエスト...APIからデータを取得する。</li>
+                <li>POSTリクエスト...APIにデータを送信して、新しいリソースを作成する。</li>
+                <li>PUTリクエスト...API上の既存データを更新する。</li>
+                <li>DELETEリクエスト...APIからリソースを削除する。</li>
+            </ul>
+
+            <h3>コード例</h3>
+            <p>以下に、GETリクエストを使ってAPIからデータを取得する簡単な例を示します。</p>
+            <pre><code>
+            axios.get('https://api.example.com/data')
+                .then(response => {
+                    console.log(response.data);
+                })
+                .catch(error => {
+                    console.error('Error:', error);
+                });
+            </code></pre>
+
+            <h3 id="notice">API通信時の注意点</h3>
+        <ul>
+            <li>認証: APIキーやOAuthなどの認証が必要な場合、適切に処理する必要があります。</li>
+            <li>セキュリティ: HTTPSを使用して、通信の安全性を確保します。また、APIキーを安全に保管し、不正アクセスを防ぐことが重要です。</li>
+            <li>CORS: クロスオリジンリクエストに関する設定に注意が必要です。適切に設定されていないと、APIがブロックされる可能性があります。</li>
+        </ul>
+
+        <h3 id="benefits">Axiosを使ったAPI通信のメリット</h3>
+            <ul>
+                <li>簡単に使用可能: 直感的なメソッドを使って、複雑なHTTPリクエストも簡単に送信できる。</li>
+                <li>自動処理: デフォルトでJSON変換やエラーハンドリングがサポートされている。</li>
+                <li>拡張性: インターセプターを使用して、リクエストやレスポンスの処理をカスタマイズ可能。</li>
+                <li>多様な機能: リクエストのキャンセル、ファイルアップロード、複数リクエストの同時処理なども簡単に行える。</li>
+            </ul>
+
+            <h3 id="alternatives">Axiosの代替ツール</h3>
+            <p>Axiosの代わりに使用できるツールとして、次のようなものがあります。</p>
+            <ul>
+                <li><strong>Fetch API</strong>: ブラウザに標準で組み込まれており、軽量で柔軟なHTTPリクエストが可能です。</li>
+                <li><strong>Superagent</strong>: 非同期通信を簡単に処理できるJavaScriptライブラリで、ファイルのアップロードやカスタムプラグインの使用が可能です。</li>
+            </ul>
+            <h2 id="error-handling">エラーハンドリング</h2>
+            <p>エラーハンドリングとはそもそもなにかというと、プログラムがエラーを起こした時に、すぐに実行を終了せずに、あらかじめ用意しておいた処理を行うことです。</p>
+            <p>API通信でエラーが発生した場合、そのステータスコードに基づいて適切な処理を行うことが重要です。</p>
+            <ul>
+                <li>**400 Bad Request**: クライアントのリクエストに問題があります。リクエストデータを見直してください。</li>
+                <li>**401 Unauthorized**: 認証が必要です。APIキーやトークンを確認してください。</li>
+                <li>**404 Not Found**: 指定されたリソースが存在しません。URLを確認してください。</li>
+                <li>**500 Internal Server Error**: サーバー側の問題です。しばらく待って再試行してください。</li>
+            </ul>
+    <h3>エラーハンドリングの例</h3>
+            <p>chatgptで出力したエラーハンドリングのコードを例として掲載します。</p>
+            <img src="codeex.jpg" alt="ex" width="50%" />
+
+
+            <p>本コンテンツの作成時間：約11時間</p>
+
+            <script>
+                document.getElementById('toggle-toc').addEventListener('click', function() {
+                    var toc = document.getElementById('toc');
+                    if (toc.style.display === 'none' || toc.style.display === '') {
+                        toc.style.display = 'block';
+                    } else {
+                        toc.style.display = 'none';
+                    }
+                });
+        
+                document.querySelectorAll('#toc a').forEach(anchor => {
+                    anchor.addEventListener('click', function(e) {
+                        e.preventDefault();
+        
+                        var target = document.querySelector(this.getAttribute('href'));
+                        var offset = 100; // 目次の高さに合わせて調整
+        
+                        window.scrollTo({
+                            top: target.offsetTop - offset,
+                            behavior: 'smooth'
+                        });
+                    });
+                });
+            </script>
+        
+                
+</body>
+</html>

@@ -1,0 +1,127 @@
+h1 {
+    text-align: center; /* コンテンツを中央に配置 */
+    padding: 0px 10px; /* 画面の上下に 0px の余白、左右に10pxの余白を設定 */
+}
+
+body {
+    background-color: #f0f8ff; /* 背景色を淡い青色に設定 */
+}
+
+p {
+    margin-top: 20px;
+    padding-left: 80px; /* 要素内側の左部に 80px の余白 */
+    padding-right: 80px; /* 要素内側の左部に 80px の余白 */
+}
+
+pre {
+    background-color: #000; /* 背景を黒色に設定 */
+    color: #fff; /* 文字色を白に設定 */
+    padding: 10px; /* 内側の余白を設定 */
+    border-radius: 5px; /* 角を少し丸くする */
+    overflow-x: auto; /* コードが長い場合に横スクロールを許可 */
+    font-size: 16px; /* フォントサイズを設定 */
+    line-height: 1.5; /* 行間を設定 */
+}
+
+code {
+    background-color: inherit; /* `pre` と同じ背景色 */
+    color: inherit; /* `pre` と同じ文字色 */
+    font-size: inherit; /* フォントサイズを `pre` と同じに設定 */
+    line-height: inherit; /* 行間を `pre` と同じに設定 */
+}
+
+
+h3 {
+    margin-top: 20px;
+    padding-left: 80px; /* 要素内側の左部に 80px の余白 */
+    padding-right: 80px; /* 要素内側の左部に 80px の余白 */
+}
+
+ul {
+    margin-top: 20px;
+    padding-left: 80px; /* 要素内側の左部に 80px の余白 */
+    padding-right: 80px; /* 要素内側の左部に 80px の余白 */
+}
+
+h2 {
+    margin-top: 20px;
+    padding-left: 70px; /* 要素内側の左部に 50px の余白 */
+}
+
+.ingredients {
+    font-weight: normal;
+    font-size: 2rem;
+    padding-left: 10px; /* 要素内側の左部に 10px の余白 */
+    border-left: 15px solid; /* 要素境界の左端に幅 15px の実線 */
+    border-bottom: 4px solid; /* 要素境界の下端に幅 4px の実線 */
+}
+
+img {
+    display: block; /* 画像をブロック要素に設定 */
+    margin: 0 auto; /* 画像を中央に配置 */
+    border-radius: 10px; /* 画像の角を丸く設定 */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.5); /* ドロップシャドウを設定 */
+  }
+
+  #toc {
+    position: fixed;
+    top: 20px; /* ボタンと目次が同じ位置になるように調整 */
+    left: 0;
+    width: 20%;
+    max-width: 300px;
+    background-color: #f9f9f9;
+    padding: 10px;
+    border: 1px solid #ccc;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    box-sizing: border-box;
+    max-height: 80vh;
+    overflow-y: auto;
+}
+
+#toggle-toc {
+    position: fixed;
+    top: 20px; /* 目次と同じ位置に固定 */
+    left: 0;   /* 目次の左に配置 */
+    background-color: #007bff;
+    color: white;
+    border: none;
+    padding: 10px;
+    cursor: pointer;
+    z-index: 1000; /* 目次より前に表示 */
+}
+
+@media (min-width: 768px) {
+    #toc {
+        width: 25%;
+        max-width: 300px;
+    }
+}
+
+@media (min-width: 1024px) {
+    #toc {
+        width: 20%;
+        max-width: 300px;
+    }
+}
+
+#toc ul {
+    list-style-type: none;
+    padding: 0;
+}
+
+#toc li {
+    margin-bottom: 10px;
+}
+
+#toc a {
+    text-decoration: none;
+    color: #007bff;
+}
+
+#toc a:hover {
+    text-decoration: underline;
+}
+
+#toc {
+    display: none;
+}
